@@ -63,4 +63,31 @@ class CinemaList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        
+class CinemaDetails(APIView):
+    
+    
+    def get(self, request, pk):
+        lord = Cinema.objects.get(pk=pk)
+        serializer_class = CinemaSerializer(lord)
+        return Response(serializer_class.data)
+
+    def put(self, request, pk):
+        lords = Cinema.objects.get(pk=pk)
+        serializer = CinemaSerializer(lords, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            
+        
+
+    def delete(self, request, pk, format=None):
+        good = Cinema.objects.get(pk=pk)
+        good.delete()
+    
+    
            
