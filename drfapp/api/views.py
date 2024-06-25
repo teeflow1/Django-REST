@@ -46,3 +46,21 @@ class AccountDetails(APIView):
         good = Account.objects.get(pk=pk)
         good.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+    
+class CinemaList(APIView):
+    
+    
+    def get(self, request):
+        accounts = Cinema.objects.all()
+        serializer = CinemaSerializer(accounts, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = CinemaSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+           
