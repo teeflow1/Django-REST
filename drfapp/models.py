@@ -19,3 +19,9 @@ class Cinema(models.Model):
     active = models.BooleanField(default=True)
     movie = models.ForeignKey(Account, on_delete=models.CASCADE, related_name="movies")
     created_at = models.DateTimeField(auto_now_add=True)
+    
+    
+    
+    def __str__(self):
+        
+        return self.title
