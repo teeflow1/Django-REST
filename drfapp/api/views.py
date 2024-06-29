@@ -83,7 +83,7 @@ class CinemaDetails(APIView):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             
-        
+        kkfff
 
     def delete(self, request, pk, format=None):
         good = Cinema.objects.get(pk=pk)
